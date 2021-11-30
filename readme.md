@@ -6,7 +6,7 @@
 
 ## Steps
 
-- unzip the file to a folder
+- unzip the file to a folder or clone it from git [github](https://github.com/sachin-sn/willhire-coding-challenge.git)
 - open the terminal in the same folder
 - run `npm install` command
 - run `npm run start` command
