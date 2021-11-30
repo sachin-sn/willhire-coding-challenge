@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Willhire coding challenge - survey page</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+  <!-- Adding some inline styles to the file-->
+  <style>
+    .container {
+      margin: 50px auto;
+    }
+    form {
+      border: 1px solid rgb(90, 89, 89);
+      background-color: rgb(247, 245, 245);
+    }
+  </style>
+  <body>
+    <header><%- include('./partials/header'); %></header>
+    <div class="container">
+      <form class="needs-validation" novalidate>
+        <div class="row justify-content-md-center">
+          <div class="col-md-auto">
+            <h1>Sample survey</h1>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-md-2"></div>
+          <div class="col-md-4">
+            <label for="surveyQuestion1" class="form-label float-right"
+              >Choose your favourite color</label
+            >
+          </div>
+          <div class="col-md-4">
+            <select
+              class="form-control needs-validation"
+              aria-label="Default select"
+              id="surveyQuestion1"
+              required
+            >
+              <option value="" selected>Choose one</option>
+              <option value="red">Red</option>
+              <option value="green">Green</option>
+              <option value="blue">Blue</option>
+              <option value="yellow">Yellow</option>
+            </select>
+            <div class="valid-feedback">Looks good!</div>
+            <div class="invalid-feedback">
+              Please choose your favourite color.
+            </div>
+          </div>
+          <div class="col-md-2"></div>
+        </div>
+        <br />
+        <div class="row justify-content-md-center">
+          <div class="col-md-auto">
+            <button type="submit" class="btn btn-primary mb-3" id="submitform">
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <footer><%- include("./partials/footer") %></footer>
+    <script>
+      (function () {
+        "use strict";
+        var forms = document.querySelectorAll(".needs-validation");
+        Array.prototype.slice.call(forms).forEach(function (form) {
+          form.addEventListener(
+            "submit",
+            function (event) {
+              if (!form.checkValidity()) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+
+              form.classList.add("was-validated");
+            },
+            false
+          );
+        });
+      })();
+      window.onload = function () {
+        document.getElementById("submitform").onclick = function () {
+          var ans = document.getElementById("surveyQuestion1").value;
+          fetch(`/answer/${ans}`);
+        };
+      };
+    </script>
+  </body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Willhire coding challenge - results</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+  </head>
+  <!-- Adding some inline styles to the file-->
+  <style>
+    .container {
+      margin: 50px auto;
+    }
+    .progress {
+      display: block;
+      width: 100%;
+      margin: 10px;
+    }
+  </style>
+  <body>
+    <header><%- include('./partials/header'); %></header>
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+          <h1 class="text-center">Survey results</h1>
+          <p class="text-center text-muted">
+            This is a sample survey results, the results shown is in percentage.
+          </p>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <% results.uniqueValues.forEach(function(item) { %>
+        <div class="progress">
+          <div
+            class="progress-bar <%=item.color%>"
+            role="progressbar"
+            style="width: <%=item.count%>%"
+            aria-valuenow="<%=item.count%>"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <%=item.key.toUpperCase()%> - <%=item.count%>%
+          </div>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="text-center col-md-auto">
+        <p class="text-muted">
+          Click on reset survey to clear all results<br />
+          <a href="#" id="resetsurvey" class="link-danger" style="color: red"
+            >Reset survey</a
+          >
+        </p>
+      </div>
+    </div>
+    <footer><%- include("./partials/footer") %></footer>
+    <script>
+      window.onload = function () {
+        document.getElementById("resetsurvey").onclick = function () {
+          fetch(`/reset`);
+          window.location.reload();
+        };
+      };
+    </script>
+  </body>
+</html>
