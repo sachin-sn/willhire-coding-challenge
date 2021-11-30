@@ -22,7 +22,9 @@ function getUnique(array) {
 }
 
 function getCount(val, array) {
-  return (array.filter((ar) => ar === val).length / array.length) * 100;
+  return parseFloat(
+    (array.filter((ar) => ar === val).length / array.length) * 100
+  ).toFixed(2);
 }
 
 function getColor(val) {
